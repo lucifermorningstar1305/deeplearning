@@ -61,14 +61,14 @@ keep_prob = tf.placeholder(tf.float32)
 weights = {
     'wc1' : tf.Variable(tf.random_normal([filter_height, filter_width, depth_in, depth_out1])),
     'wc2' : tf.Variable(tf.random_normal([filter_height, filter_width, depth_out1, depth_out2])),
-    'wd1' : tf.Variable(tf.random_normal([(input_height//4)*(input_width//4)*depth_out2, 1024])),
-    'wout' : tf.Variable(tf.random_normal([1024, n_classes]))
+    'wd1' : tf.Variable(tf.random_normal([(input_height//4)*(input_width//4)*depth_out2, depth_out3])),
+    'wout' : tf.Variable(tf.random_normal([depth_out3, n_classes]))
 }
 
 biases = {
     'bc1' : tf.Variable(tf.random_normal([depth_out1])),
     'bc2' : tf.Variable(tf.random_normal([depth_out2])),
-    'bd1' : tf.Variable(tf.random_normal([1024])),
+    'bd1' : tf.Variable(tf.random_normal([depth_out3])),
     'bout' : tf.Variable(tf.random_normal([n_classes]))
 }
 
@@ -108,19 +108,23 @@ def convnet(x, weights, biases, dropout):
     """ Convolution Operation 1 """
     conv1 = conv2d(x,weights['wc1'],biases['bc1'])
     conv1 = maxpool2d(conv1)
+    conv1 = tf.nn.relu(conv1)
+    conv1 = tf.nn.dropout(conv1, dropout)
 
     """ Convolution Operation 2 """
     conv2 = conv2d(conv1, weights['wc2'], biases['bc2'])
     conv2 = maxpool2d(conv2)
+    conv2 = tf.nn.relu(conv2)
+    conv2 = tf.nn.dropout(conv2, dropout)
 
     """ Fully Connected Layer """ 
-    fc = tf.reshape(conv2, [-1, weights['wd1'].get_shape().as_list()[0]])
+    fc = tf.reshape(conv2, shape=[-1, weights['wd1'].get_shape().as_list()[0]])
     fc = tf.add(tf.matmul(fc, weights['wd1']), biases['bd1'])
     fc = tf.nn.relu(fc)
     
 
-    """ Droput Operation """
-    fc = tf.nn.dropout(fc,dropout)
+    # """ Droput Operation """
+    # fc = tf.nn.dropout(fc,dropout)
 
     """ Output Class prediction """
     out = tf.add(tf.matmul(fc, weights['wout']), biases['bout'])
