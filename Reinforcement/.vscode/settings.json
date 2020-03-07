@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "/home/lucifer/torch-gpu/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}
