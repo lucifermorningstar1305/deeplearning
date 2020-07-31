@@ -56,11 +56,7 @@ words = [vector("i"), vector("like"), vector("eggs")]
 
 The Bag of Words formula is as follows:
 $$
-\begin{equation}
 \frac{\sum_{w \in S}vec(w)}{|sentence|}
-
-
-\end{equation}
 $$
 Thus the above formula is used in the line 
 
