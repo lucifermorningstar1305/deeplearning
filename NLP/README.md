@@ -9,6 +9,8 @@
 
 * **BOW_classifier** : The purpose of this notebook is to evaluate the accuracies of a Glove vector model and a Word2vec vector model, though I haven't use the Word2Vec as it required GBs to download but you can do that as a challenge. 
 
+* **BigramModel** : The purpose of this notebook is to demonstrate the Bigram Model or rather the Markov Model
+
 
 
 # Understanding the BOW_classifier transform function
@@ -56,7 +58,11 @@ words = [vector("i"), vector("like"), vector("eggs")]
 
 The Bag of Words formula is as follows:
 
-$\frac{\sum_{w \in S}vec(w)}{|sentence|}$
+```python
+sum(vec(w) for w in S) / len(sentence)
+```
+
+
 
 Thus the above formula is used in the line 
 
@@ -65,4 +71,28 @@ X[n] = np.mean(vectors, axis=0)
 ```
 
 where X is a feature vector for the sentence "I like eggs"
+
+
+
+
+
+# Bigram Model (aka Markov Model)
+
+Formula for Bigram Model is :
+
+```
+p(B|A) = count(A -> B) / count(A)
+```
+
+The formula has one problem : 
+
+If our model has a small vocabulary and if we input a custom sentence such as "The quick brown fox jumps over the dog"  then the output probability will be 0 if there is no word such as "turtle". Hence to counter such behaviour , *Add-One smoothning* is used 
+
+```
+p(B|A) = (count(A -> B) + 1) / (count(A) + vocab_size)
+```
+
+
+
+
 
