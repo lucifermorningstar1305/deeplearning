@@ -9,9 +9,11 @@
 
 * **BOW_classifier** : The purpose of this notebook is to evaluate the accuracies of a Glove vector model and a Word2vec vector model, though I haven't use the Word2Vec as it required GBs to download but you can do that as a challenge. 
 
-* **BigramModel** : The purpose of this notebook is to demonstrate the Bigram Model or rather the Markov Model
+* **BigramModel** : The purpose of this notebook is to demonstrate the Bigram Model or rather the Markov Model.
 
+* **NeuralBigramModel** : The purpose of this notebook is to demonstrate the BigramModel built using just a single neuron.
 
+* **NeuralNetworkBigramModel** : The purpose of this notebook is to demonstrate the BigramModel built using 2-layer neural network
 
 # Understanding the BOW_classifier transform function
 
@@ -91,8 +93,6 @@ If our model has a small vocabulary and if we input a custom sentence such as "T
 ```
 p(B|A) = (count(A -> B) + 1) / (count(A) + vocab_size)
 ```
-
-
 
 
 
