@@ -15,6 +15,8 @@
 
 * **NeuralNetworkBigramModel** : The purpose of this notebook is to demonstrate the BigramModel built using 2-layer neural network
 
+* **ImprovisedNeuralNetworkBigram** : The purpose of this notebook is to demonstrate the NeuralNetworkBigram Model much more memory efficient.
+
 # Understanding the BOW_classifier transform function
 
 The idea of this function is to transform a word into it's vector form using any vector model (such as Glove, Word2Vec etc.)
